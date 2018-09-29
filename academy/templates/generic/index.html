@@ -1,0 +1,48 @@
+{% extends '../base/app.html' %}
+
+{% block content %}
+
+    <section>
+        <div class="container">
+            {% if sliders %}
+                <div id="slider" class="carousel">
+                    {% for slider in sliders %}
+                        <div class="single-slide" style="background: url({{ slider.file.url }}) no-repeat center #000; background-size:cover">
+                            <div class="content-box">
+                                <h2 class="title is-4">{{ slider.title }}</h2>
+                                <p>{{ slider.description }}</p>
+                                <a href="{{ slider.link }}" class="button is-info">{{ slider.link_title }}</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    {% if courses %}
+    <div class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <h3 class="title is-5 is-uppercase has-text-white">New Releases</h3>
+                <div class="columns is-multiline is-carousel is-courses-slider">
+                {% for course in courses %}
+                    <div class="column course-snippet is-3">
+                        <figure class="image" style="background: url({{ course.image.url }}) no-repeat center; background-size: cover">
+                            <img src="{{ course.image.url }}" alt="{{ course.title }}">
+                        </figure>
+                        <div class="course-content">
+                            {% include '../parts/snippets/authors.html' with authors=course.authors.all %}
+                            <h4 class="title is-6">
+                                <a href="{% url "academy:view_tuts" id=course.id %}">{{ course.title }}</a>
+                            </h4>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock content %}

@@ -1,0 +1,91 @@
+{% load static %}
+<header id="main">
+    <nav class="navbar is-dark is-transparent">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="{% url 'academy:index' %}" class="navbar-item logo">
+                    <img src="{% static 'images/logo.png' %}" alt="Komotion Academy">
+                </a>
+                <div class="navbar-burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="navbar-menu">
+                <!-- <div class="navbar-start">
+                    <a href="#" class="navbar-item">Home</a>
+                    <a href="#" class="navbar-item">How it works</a>
+                    <a href="#" class="navbar-item">Forum</a>
+                    <a href="#" class="navbar-item">Blog</a>
+                </div> -->
+                <div class="navbar-end">
+                    <a href="{% url 'academy:index' %}" class="navbar-item">Home</a>
+                    <a href="{% url 'academy:how_it_works' %}" class="navbar-item">How it works</a>
+                    <a href="#" class="navbar-item">Forum</a>
+                    <a href="#" class="navbar-item">Blog</a>
+                    <div class="navbar-item">
+                        <a href="{% url 'login' %}" class="button is-info">Sign up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<header id="subnav">
+    <!-- Tutorial Nav -->
+    <nav class="navbar is-dark is-sub is-transparent">
+        <div class="container">
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="#" class="navbar-link">Browse by Rank</a>
+                        <div class="navbar-dropdown is-boxed">
+                            {% if ranks %}
+                                {% for rank in ranks %}
+                                    <a href="{% url 'academy:browse_tuts' %}?type=rank&browse={{ rank.title }}" class="navbar-item">{{ rank.title }}</a>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="#" class="navbar-link">Browse by Categories</a>
+                        <div class="navbar-dropdown is-boxed">
+                            {% if categories %}
+                                {% for category in categories %}
+                                    <a href="{% url 'academy:browse_tuts' %}?type=category&browse={{ category.title }}" class="navbar-item">{{ category.title }}</a>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="#" class="navbar-link">Browse by Software</a>
+                        <div class="navbar-dropdown is-boxed">
+                            {% if softwares %}
+                                {% for software in softwares %}
+                                    <a href="{% url 'academy:browse_tuts' %}?type=software&browse={{ software.title }}" class="navbar-item">{{ software.title }}</a>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <a href="{% url 'academy:browse_tuts' %}" class="navbar-item">Browse all</a>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <form action="#" method="get">
+                            {% csrf_token %}
+                            <div class="field has-addons">
+                                <p class="control">
+                                    <input type="search" name="q" class="input is-small" placeholder="Search">
+                                </p>
+                                <p class="control">
+                                    <button class="button is-white is-small"><i class="fas fa-search"></i></button>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

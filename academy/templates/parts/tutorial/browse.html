@@ -1,0 +1,54 @@
+{% extends '../../base/app.html' %}
+
+{% block content %}
+
+    <div class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-9">
+                        {% if courses %}
+                            {% if request.GET.type %}
+                                <h4 class="title is-7 has-text-white">BROWSE BY {{ request.GET.type|upper }}</h4>
+                                <hr>
+                            {% endif %}
+                            {% if request.GET.browse %}
+                                <h1 class="title is-3 has-text-white">{{ request.GET.browse }}</h1>
+                            {% else %}
+                                <h1 class="title is-3 has-text-white">Browse All</h1>
+                                <hr>
+                            {% endif %}
+
+                            <div class="columns is-multiline">
+                                {% for course in courses %}
+                                    <div class="column is-4 course-file-browse">
+                                        <figure class="image" style="background: url({{ course.image.url }}) no-repeat center; background-size: cover">
+                                            <img src="{{ course.image.url }}" alt="{{ course.title }}">
+                                            <a href="{% url 'academy:view_tuts' id=course.id %}"></a>
+                                        </figure>
+                                        <h4 class="title is-6">
+                                            <a href="{% url 'academy:view_tuts' id=course.id %}">{{ course.title }}</a>
+                                        </h4>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {% if request.GET.type %}
+                                <h4 class="title is-7 has-text-white">BROWSE BY {{ request.GET.type|upper }}</h4>
+                                <hr>
+                            {% endif %}
+                            {% if request.GET.browse %}
+                                <h1 class="title is-3 has-text-white">{{ request.GET.browse }}</h1>
+                            {% endif %}
+                            <h1 class="title is-6 has-text-danger">We couldn't find any results matching your selected filter</h1>
+                        {% endif %}
+                    </div>
+                    <div class="column is-3">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

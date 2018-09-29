@@ -1,0 +1,30 @@
+{% load is_video_active %}
+{% if files %}
+    <ul class="menu-list course-file-list">
+        {% for file in files %}
+            <li>
+                <a href="{% url 'academy:view_video' id=tutorial video=file.id %}" class="{{ file.id|is_active:video.id }}">
+                    <div class="columns is-mobile">
+                        <div class="column is-3">
+                            <figure class="image">
+                                <img src="{{ file.image.url }}" alt="{{ file.title }}">
+                            </figure>
+                        </div>
+                        <div class="column is-9">
+                            <h3 class="title is-6 is-marginless">
+                                {{ file.title }}
+                            </h3>
+                            <div class="level is-mobile course-meta">
+                                <div class="level-left">
+                                    <div class="level-item has-text-white is-size-7">
+                                        <span class="icon"><i class="fas fa-clock"></i></span> <span>{{ file.duration|time:'i:s' }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

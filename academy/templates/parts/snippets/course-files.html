@@ -1,0 +1,27 @@
+{% if files %}
+    <div id="course-files">
+        {% for file in files %}
+            <div class="columns is-mobile course-file">
+                <div class="column is-3">
+                    <figure class="image">
+                        <img src="{{ file.image.url }}" alt="{{ file.title }}">
+                    </figure>
+                </div>
+                <div class="column is-9">
+                    <h3 class="title is-5 is-marginless">
+                        <a href="{% url 'academy:view_video' id=tutorial video=file.id %}">{{ file.title }}</a>
+                    </h3>
+                    <p class="is-marginless">{{ file.description|truncatewords:18 }}</p>
+                    <div class="level is-mobile course-meta">
+                        <div class="level-left">
+                            <div class="level-item has-text-white">
+                                Duration: {{ file.duration|time:'H:i:s' }}
+                            </div>
+                            <div class="level-item"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

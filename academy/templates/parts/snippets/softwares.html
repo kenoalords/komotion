@@ -1,0 +1,9 @@
+{% if softwares %}
+    <ul class="categories">
+        {% for software in softwares %}
+            <li>
+                <a href="#">{{ software.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

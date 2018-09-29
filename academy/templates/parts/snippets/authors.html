@@ -1,0 +1,12 @@
+{% if authors %}
+<div class="avatar-group is-inverse">
+    {% for author in authors %}
+    <div class="avatar is-small">
+        <figure class="image">
+            <img src="{{ author.avatar.url }}" alt="{{ author.name }}">
+        </figure>
+        <div><a href="#">{{ author.name }}</a></div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

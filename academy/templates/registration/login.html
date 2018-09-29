@@ -1,0 +1,22 @@
+{% extends '../base/user.html' %}
+{% load static %}
+{% block content %}
+    <h1 class="title has-text-white is-4 has-font-weight-lighter has-text-centered">Login</h1>
+    <form action="{% url 'login' %}" method="post">
+        <div class="field">
+            {{ form.username }}
+        </div>
+        <div class="field">
+            {{ form.password }}
+        </div>
+        <div class="field">
+            <button class="button is-info is-fullwidth" type="submit">Login</button>
+        </div>
+        <div class="field">
+            <p>
+                Don't have an account? <a href="{% url 'register' %}" class="has-text-weight-bold">Click here to sign up</a>
+            </p>
+        </div>
+    </form>
+
+{% endblock content %}

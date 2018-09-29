@@ -1,0 +1,110 @@
+{% extends '../base/signup.html' %}
+{% load static %}
+{% block content %}
+
+    {% if request.GET.plan is None %}
+    <div class="has-text-centered">
+        <h1 class="title has-text-white is-3 has-font-weight-lighter">Choose a plan</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    </div>
+    <div class="pricing-table">
+        <div class="pricing-plan">
+            <div class="plan-header">Cadet</div>
+            <div class="plan-price"><span class="plan-price-amount"><span class="plan-price-currency">$</span>20</span>/month</div>
+            <div class="plan-items">
+                <div class="plan-item">20GB Storage</div>
+                <div class="plan-item">100 Domains</div>
+                <div class="plan-item">-</div>
+                <div class="plan-item">-</div>
+            </div>
+            <div class="plan-footer">
+                <a href="{% url 'register' %}?plan=1" class="button is-fullwidth">Choose</a>
+            </div>
+        </div>
+
+        <div class="pricing-plan is-warning is-active">
+            <div class="plan-header">Captain</div>
+            <div class="plan-price"><span class="plan-price-amount"><span class="plan-price-currency">$</span>40</span>/month</div>
+            <div class="plan-items">
+                <div class="plan-item">20GB Storage</div>
+                <div class="plan-item">25 Domains</div>
+                <div class="plan-item">1TB Bandwidth</div>
+                <div class="plan-item">-</div>
+            </div>
+            <div class="plan-footer">
+                <a href="{% url 'register' %}?plan=2" class="button is-fullwidth">Choose</a>
+            </div>
+        </div>
+
+        <div class="pricing-plan">
+            <div class="plan-header">General</div>
+            <div class="plan-price"><span class="plan-price-amount"><span class="plan-price-currency">$</span>60</span>/month</div>
+            <div class="plan-items">
+                <div class="plan-item">200GB Storage</div>
+                <div class="plan-item">50 Domains</div>
+                <div class="plan-item">1TB Bandwidth</div>
+                <div class="plan-item">100 Email Boxes</div>
+            </div>
+            <div class="plan-footer">
+                <a href="{% url 'register' %}?plan=3" class="button is-fullwidth">Choose</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if request.GET.plan %}
+    <h1 class="title has-text-white is-4 has-font-weight-lighter has-text-centered">Sign up</h1>
+    <div class="columns is-centered">
+        <div class="column is-5">
+            <form class="form" action="{% url 'register' %}" method="post">
+                {% csrf_token %}
+
+                <div class="field">
+                    {{ form.email }}
+                    <p class="help is-light">{{ form.email.help_text }}</p>
+                </div>
+                <div class="field">
+                    {{ form.password1 }}
+                    <p class="help is-light">{{ form.password1.help_text }}</p>
+                    {% if form.password1.errors %}
+                        <span class="help is-danger">{{ form.password1.errors }}</span>
+                    {% endif %}
+                </div>
+                <div class="field">
+                    {{ form.password2 }}
+                    <p class="help is-light">{{ form.password2.help_text }}</p>
+                    {% if form.password2.errors %}
+                        <span class="help is-danger">{{ form.password2.errors }}</span>
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="field">
+                    {{ form.first_name }}
+                    <p class="help is-light">{{ form.first_name.help_text }}</p>
+                    {% if form.first_name.errors %}
+                        <span class="help is-danger">{{ form.first_name.errors }}</span>
+                    {% endif %}
+                </div>
+                <div class="field">
+                    {{ form.last_name }}
+                    <p class="help is-light">{{ form.last_name.help_text }}</p>
+                    {% if form.last_name.errors %}
+                        <span class="help is-danger">{{ form.last_name.errors }}</span>
+                    {% endif %}
+                </div>
+                <div class="field">
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                    <button type="submit" name="submit" class="button is-fullwidth is-info">Sign up</button>
+                </div>
+                <p class="field has-text-centered">
+                    <a href="{% url 'reset_password' %}" class="has-text-weight-bold">Forgot password</a>
+                </p>
+                <hr>
+                <div class="field">
+                    <p>Already have an account? <b><a href="{% url "login" %}?next={{ request.GET.next }}" class="has-text-weight-bold">Login here</a></b></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+{% endblock content %}

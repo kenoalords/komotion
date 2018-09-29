@@ -1,0 +1,38 @@
+<div class="hero sub-footer">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    {% if softwares %}
+                        <h4 class="title is-6 has-text-white has-text-uppercase">Browse by softwares</h4>
+                        <ul class="menu-list-custom">
+                        {% for software in softwares %}
+                            <li><a href="{% url 'academy:browse_tuts' %}?type=software&browse={{ software.title }}">{{ software.title }}</a></li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="column">
+                    {% if categories %}
+                        <h4 class="title is-6 has-text-white has-text-uppercase">Browse by category</h4>
+                        <ul class="menu-list-custom">
+                        {% for category in categories %}
+                            <li><a href="{% url 'academy:browse_tuts' %}?type=category&browse={{ category.title }}">{{ category.title }}</a></li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="column">
+                    {% if ranks %}
+                        <h4 class="title is-6 has-text-white has-text-uppercase">Browse by ranks</h4>
+                        <ul class="menu-list-custom">
+                        {% for rank in ranks %}
+                            <li><a href="{% url 'academy:browse_tuts' %}?type=rank&browse={{ rank.title }}">{{ rank.title }}</a></li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+{% extends '../../base/app.html' %}
+
+{% block content %}
+
+<div class="hero is-burnt">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-6">
+                    <figure class="image">
+                        <img src="{{ course.image.url }}" alt="{{ course.title }}">
+                    </figure>
+                </div>
+                <div class="column is-6">
+                    {% include '../snippets/authors.html' with authors=course.authors.all %}
+                    <h1 class="title is-2 has-text-white">{{ course.title }}</h1>
+                    <div class="level is-mobile">
+                        <div class="level-left">
+                            <div class="level-item">
+                                {% include '../snippets/categories.html' with categories=course.category.all %}
+                            </div>
+                            <div class="level-item">
+                                {% include '../snippets/softwares.html' with softwares=course.software.all %}
+                            </div>
+                        </div>
+                    </div>
+                    {% if course.description %}
+                        <p></p>
+                        <p class="has-text-white">{{ course.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hero">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    {% if course.files %}
+                        <h2 class="title is-4 has-text-white">{{ course.files.count }} Video{{ course.files.count|pluralize }}</h2>
+                        <hr>
+                        {% include '../snippets/course-files.html' with files=course.files.all tutorial=course.id %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

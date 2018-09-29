@@ -1,0 +1,409 @@
+@import '../node_modules/bulma/bulma.sass';
+@import '../node_modules/bulma-pricingtable/dist/css/bulma-pricingtable.sass';
+@import "../node_modules/slick-carousel/slick/slick.scss";
+@import '../node_modules/slick-carousel/slick/slick-theme.scss';
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
+
+$highlightColor: #209cee;
+$baseColor: #0f1823;
+$linkColor: #213b74;
+$linkColorHover: #4d6290;
+
+body{
+    line-height: 1.3;
+    background: $baseColor;
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    position: relative;
+    &:before{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255,255,255,.02);
+        z-index: 1;
+    }
+    #wrapper{
+        position: relative;
+        z-index: 2;
+    }
+}
+
+p{
+    margin-bottom: 1em;
+    font-size: 15px;
+    color: #fff;
+}
+#content-wrapper{
+    p{
+        opacity: .6;
+    }
+}
+
+h1, h2, h3, h4{
+    font-weight: 700;
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+}
+
+.container{
+    max-width: 1024px;
+}
+
+
+
+.navbar{
+    &.is-dark{
+        background: $baseColor;
+        min-height: 4em;
+        .navbar-item{
+            &:hover{
+                color: $linkColorHover !important;
+            }
+        }
+        &.is-sub{
+            min-height: 3.5em;
+            border-top: 1px solid rgba(255,255,255,.05);
+            box-shadow: 0 12px 24px -6px rgba(0,0,0,.5);
+            .navbar-item{
+                font-size: 14px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            .navbar-dropdown{
+                .navbar-item{
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+    .logo{
+        img{
+            max-height: 5em;
+            width: auto;
+        }
+    }
+    .field{
+        p{
+            margin-bottom: 0;
+        }
+    }
+}
+
+.button{
+    border-radius: 2px;
+    &.is-info{
+        background: $linkColor;
+        &:hover{
+            background: $linkColorHover;
+        }
+    }
+}
+
+#slider{
+    .single-slide{
+        min-height: 480px;
+        position: relative;
+        .content-box{
+            position: absolute;
+            right: 2em;
+            max-width: 400px;
+            top: 20%;
+            .title{
+                color: #fff;
+                background: rgba(0,0,0,.4);
+                padding: 10px;
+                margin: 0;
+                text-transform: uppercase;
+            }
+            p{
+                color: #aaa;
+                background: rgba(0,0,0,.7);
+                padding: 10px;
+            }
+        }
+    }
+    .slick-dots{
+        li{
+            button{
+                &:before{
+                    color: #fff;
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+            &.slick-active{
+                button{
+                    &:before{
+                        color: $highlightColor;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.is-carousel{
+    position: relative;
+    .slick-list{
+        width: 100%;
+        position: relative;
+    }
+}
+
+.course-snippet{
+    >figure{
+        margin-bottom: 1em;
+        height: 180px;
+        width: 100%;
+        overflow: hidden;
+        img{
+            display: none;
+        }
+    }
+    .title{
+        text-transform: uppercase;
+        margin-bottom: 5px;
+        a{
+            color: #fff !important;
+            &:hover{
+                color: $linkColorHover !important;
+            }
+        }
+    }
+}
+
+.avatar-group{
+    display: inline-block;
+    &.is-inverse{
+        .avatar{
+            div{
+                a{
+                    color: #fff;
+                    opacity: .6;
+                }
+            }
+        }
+    }
+    .avatar{
+        display: flex;
+        align-items: center;
+        &.is-small{
+            figure{
+                max-width: 18px;
+            }
+        }
+        figure{
+            max-width: 28px;
+            height: auto;
+            img{
+                border-radius: 28px;
+            }
+        }
+        div{
+            margin-left: 5px;
+            font-size: 13px;
+        }
+    }
+}
+
+hr{
+    height: 1px;
+    opacity: .1;
+}
+
+ul.categories{
+    li{
+        display: inline-block;
+        font-size: 13px;
+        &:after{
+            content: ",";
+            color: #fff;
+        }
+        &:last-child{
+            &:after{
+                display: none;
+            }
+        }
+        a{
+            color: #fff;
+            text-decoration: underline;
+            &:hover{
+                color: $highlightColor;
+            }
+        }
+    }
+}
+
+#course-files{
+    .course-file{
+        .title{
+            a{
+                color: #fff;
+                &:hover{
+                    color: $highlightColor;
+                }
+            }
+        }
+        .course-meta{
+            font-size: 13px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+    }
+}
+
+.course-file-browse{
+    figure{
+        height: 200px;
+        position: relative;
+        img{
+            display: none;
+        }
+        a{
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    }
+    .title{
+        margin-top: .5em;
+        text-transform: uppercase;
+        a{
+            color: #fff;
+            &:hover{
+                color: $highlightColor;
+            }
+        }
+    }
+    .course-meta{
+        font-size: 13px;
+        margin-top: 5px;
+        font-weight: bold;
+    }
+}
+
+#footer{
+    background: $baseColor;
+    .title{
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        opacity: .5;
+    }
+}
+
+.sub-footer{
+    background: $baseColor;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+}
+
+.hero{
+    &.is-burnt{
+        background: $baseColor;
+    }
+}
+
+.has-text-uppercase{
+    text-transform: uppercase;
+}
+
+.menu-list-custom{
+    a{
+        color: #aaa;
+        display: block;
+        padding: 2.5px 0;
+    }
+}
+
+.video-view{
+    iframe{
+        width: 100%;
+        height: 480px !important;
+    }
+}
+
+.player{
+    .vp-player-layout{
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        min-height: 480px !important;
+    }
+}
+
+.course-file-list{
+    .title{
+        color: #fff;
+    }
+    span{
+        opacity: .5;
+    }
+    li{
+        &:hover{
+            a{
+                .title{
+                    color: #222;
+                }
+                span{
+                    color: #222;
+                }
+                &.is-active{
+                    .title{
+                        color: #fff;
+                    }
+                    span{
+                        color: #fff;
+                    }
+                }
+            }
+        }
+        a{
+            &.is-active{
+                position: relative;
+                &:after{
+                    font-family: "Font Awesome 5 Free";
+                    content: "\f144";
+                    position: absolute;
+                    font-size: 24px;
+                    right: 12px;
+                    opacity: .5;
+                    top: 50%;
+                    margin-top: -16px;
+                }
+            }
+        }
+    }
+}
+
+// USER FORMS
+.user-form{
+    .hero{
+        &.is-burnt{
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#21354f+0,0f1823+100 */
+            background: #21354f; /* Old browsers */
+            background: -moz-radial-gradient(center, ellipse cover, #21354f 0%, #0f1823 100%); /* FF3.6-15 */
+            background: -webkit-radial-gradient(center, ellipse cover, #21354f 0%,#0f1823 100%); /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center, #21354f 0%,#0f1823 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#21354f', endColorstr='#0f1823',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        }
+    }
+    position: relative;
+    z-index: 2;
+    .logo{
+        img{
+            max-width: 96px;
+        }
+    }
+    form{
+        input{
+            &[type="text"]{
+                padding: 10px;
+            }
+        }
+    }
+}
