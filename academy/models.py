@@ -70,7 +70,7 @@ class CourseFile(models.Model):
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to="course_file", null=True, blank=True)
     file = models.CharField(max_length=512)
-    duration = models.TimeField()
+    duration = models.CharField(max_length=24, null=True, blank=True)
     views = models.ManyToManyField('View', blank=True)
     likes = models.ManyToManyField('Like', blank=True)
 

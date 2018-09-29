@@ -1,0 +1,5 @@
+node_modules
+assets 
+komotion/settings.py
+gulpfile.js
+webpack.config.js
