@@ -1,7 +1,7 @@
 {% extends '../../base/app.html' %}
 
 {% block content %}
-    <div class="hero is-burnt">
+    <div class="hero">
         <div class="hero-body">
             <div class="container">
                 <div class="">
@@ -24,19 +24,20 @@
             </div>
         </div>
     </div>
-    <div class="container video-view">
-        <div class="hero is-medium">
+    <div class="video-view">
+        <div class="hero is-burnt is-medium">
             <div class="hero-body">
-                <div class="columns">
-                    <div class="column is-8 is-marginless is-paddingless">
-                        <h1 class="title is-3 has-text-white">{{ video.title }}</h1>
-                        <p>{{ video.description }}</p>
-                    </div>
-                    <div class="column is-4 is-marginless is-paddingless">
-                        <aside class="menu">
-                            <p class="menu-label has-text-white">Course files</p>
-                            {% include '../snippets/course-files-list.html' with tutorial=course.id  files=course.files.all %}
-                        </aside>
+                <div class="container">
+                    <div class="columns is-centered">
+                        <div class="column is-8 is-marginless is-paddingless">
+                            <h1 class="title is-3 has-text-white">{{ video.title }}</h1>
+                            <p>{{ video.description }}</p>
+                            <hr>
+                            <aside class="menu">
+                                <p class="menu-label has-text-white">Course files</p>
+                                {% include '../snippets/course-files-list.html' with tutorial=course.id  files=files %}
+                            </aside>
+                        </div>
                     </div>
                 </div>
             </div>

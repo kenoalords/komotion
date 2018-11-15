@@ -1,0 +1,44 @@
+{% extends '../base/dashboard.html' %}
+
+{% block content %}
+
+    <section>
+        <div class="container">
+            <div class="level is-mobile">
+                <div class="level-left">
+                    <div class="level-item">
+                        <h2 class="title is-3 is-size-5-mobile">Subscription</h2>
+                    </div>
+                </div>
+                <div class="level-left">
+                    <div class="level-item">
+                        {% if sub is None %}
+                            <span class="indicator is-inactive">Inactive</span>
+                        {% else %}
+                            {% if sub.is_active == True %}
+                                <span class="indicator is-active">Active</span>
+                            {% else %}
+                                <span class="indicator is-expired">Expired</span>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            {% if sub.is_active == False %}
+                <div class="has-text-centered">
+                    <h4 class="title is-4 is-danger">You do not have any active subscriptions</h4>
+                    <p class="has-text-dark">Please choose your rank and subscribe to gain access to the academy</p>
+                </div>
+                {% include 'parts/snippets/subscription_form.html' %}
+            {% else %}
+                <div>
+                    <h4 class="title is-5">You are currently subscribed to {{ sub.rank.title }} rank.</h4>
+                    <p class="has-text-dark">Your subscription ends {{ sub.end_date }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock content %}

@@ -1,0 +1,156 @@
+{% extends '../base/dashboard.html' %}
+
+{% block content %}
+
+    <section>
+        <div class="container">
+            <h2 class="title is-3">Edit: {{ course.title }}</h2>
+            {% if form.none_field_errors %}
+                <div class="notification is-danger">There are some errors in your form</div>
+                {{ form.none_field_errors }}
+            {% endif %}
+            <form action="{% url 'academy:edit_course' id=course.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="field">
+                    {{ form.title }}
+                    {% if form.errors.title %}
+                        <span class="help is-danger">Please enter a title</span>
+                    {% endif %}
+                </div>
+                <div class="field">
+                    {{ form.description }}
+                </div>
+                <div class="field">
+                    <h4 class="title is-6">Upload/Select Course Image</h4>
+                    {{ form.image }}
+                </div>
+                <hr>
+                <div class="columns is-multiline">
+                    <div class="column">
+                        <h4 class="title is-6">Select authors</h4>
+                        {{ form.authors }}
+                    </div>
+                    <div class="column">
+                        <h4 class="title is-6">Select categories</h4>
+                        {{ form.category }}
+                    </div>
+                    <div class="column">
+                        <h4 class="title is-6">Select softwares</h4>
+                        {{ form.software }}
+                    </div>
+                    <div class="column">
+                        <h4 class="title is-6">Select ranks</h4>
+                        {{ form.rank }}
+                    </div>
+                </div>
+                <script type="text/javascript" id="empty-course-item-form">
+                    <div id="form-__prefix__">
+                        <h4 class="title is-5">Add course file</h4>
+                        <div class="course_file_block">
+                            <div class="field">
+                                {{ course_file_forms.empty_form.title }}
+                            </div>
+                            <div class="field">
+                                {{ course_file_forms.empty_form.description }}
+                            </div>
+                            <div class="field">
+                                <p class="has-text-dark">Copy and paste video embed code</p>
+                                {{ course_file_forms.empty_form.file }}
+                            </div>
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <p class="has-text-dark">Upload image</p>
+                                    {{ course_file_forms.empty_form.image }}
+                                </div>
+                                <div class="control">
+                                    <p class="has-text-dark">Video duration</p>
+                                    {{ course_file_forms.empty_form.duration }}
+                                </div>
+                                <div class="control">
+                                    <p class="has-text-dark">Track number</p>
+                                    {{ course_file_forms.empty_form.track_no }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+
+                <hr>
+                {{ course_file_forms.management_form }}
+                {% if course_file_forms.none_field_errors %}
+                    <div class="notification is-danger">There are some errors in your form</div>
+                    {{ course_file_forms.none_field_errors }}
+                {% endif %}
+                {% if course_file_forms %}
+                    <section id="file-forms">
+                        {% for form in course_file_forms %}
+                            {{ form.id }}
+                            <div id="form-{{ forloop.counter0 }}">
+                                {% if course %}
+                                    <h2 class="title is-5">Edit course file</h2>
+                                {% else %}
+                                    <h2 class="title is-5">Add course file</h2>
+                                {% endif %}
+                                <div class="course_file_block">
+                                    <div class="field">
+                                        {{ form.title }}
+                                        {% if form.errors.title %}
+                                            <span class="help is-danger">Please enter a title</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="field">
+                                        {{ form.description }}
+                                        {% if form.errors.description %}
+                                            <span class="help is-danger">Please enter a description</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="field">
+                                        <p class="has-text-dark">Copy and paste video embed code</p>
+                                        {{ form.file }}
+                                        {% if form.errors.file %}
+                                            <span class="help is-danger">Please copy and paste embed code</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="field is-grouped">
+                                        <div class="control">
+                                            <p class="has-text-dark">Upload image</p>
+                                            {{ form.image }}
+                                            {% if form.errors.image %}
+                                                <span class="help is-danger">Please upload an image</span>
+                                            {% endif %}
+                                        </div>
+                                        <div class="control">
+                                            <p class="has-text-dark">Video duration</p>
+                                            {{ form.duration }}
+                                            {% if form.errors.duration %}
+                                                <span class="help is-danger">Please specify video duration</span>
+                                            {% endif %}
+                                        </div>
+                                        <div class="control">
+                                            <p class="has-text-dark">Track number</p>
+                                            {{ form.track_no }}
+                                            {% if form.errors.track_no %}
+                                                <span class="help is-danger">Please enter a track number</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </section>
+                    <p>
+                        <a href="#" id="add-course-form" class="button is-small is-rounded">
+                            <span class="icon"><i class="fas fa-plus"></i></span>
+                            <span>Add new form</span>
+                        </a>
+                    </p>
+                {% endif %}
+                <hr>
+                <div class="field">
+                    <button type="submit" class="button is-rounded is-primary">Submit Course</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+{% endblock content %}

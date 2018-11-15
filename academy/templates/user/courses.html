@@ -1,0 +1,48 @@
+{% extends '../base/dashboard.html' %}
+
+{% block content %}
+
+    <section>
+        <div class="container">
+            <div class="level is-mobile">
+                <div class="level-left">
+                    <div class="level-item">
+                        <h2 class="title is-3">Courses</h2>
+                    </div>
+                </div>
+                <div class="level-right">
+                    <div class="level-item">
+                        <a href="{% url 'academy:add_course' %}" class="button is-info is-small is-rounded">Add course</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            {% if courses %}
+                {% for course in courses %}
+                    <div class="columns admin_courses">
+                        <div class="column is-3">
+                            <figure class="image" style="background: url({{ course.image.url }}) no-repeat center; background-size: cover">
+                                <img src="{{ course.image.url }}" alt="{{ course.title }}">
+                            </figure>
+                        </div>
+                        <div class="column is-9">
+                            <div class="">
+                                {% include '../parts/snippets/authors.html' with authors=course.authors.all %}
+                                <h4 class="title is-4">
+                                    <a href="{% url "academy:view_tuts" id=course.id %}">{{ course.title }}</a>
+                                </h4>
+                                <p>{{ course.description|truncatewords:20 }}</p>
+                                <p>
+                                    <a href="{% url 'academy:edit_course' id=course.id %}">Edit course</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="notification is-danger">You have not uploaded any courses</div>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock content %}

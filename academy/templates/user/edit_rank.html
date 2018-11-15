@@ -1,0 +1,67 @@
+{% extends '../base/dashboard.html' %}
+
+{% block content %}
+
+    <section>
+        <div class="container">
+            <div class="level is-mobile">
+                <div class="level-left">
+                    <div class="level-item">
+                        <h2 class="title is-3">Edit: {{ rank.title }}</h2>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <form action="{% url 'academy:admin_ranks_edit' id=rank.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if form.none_form_errors %}
+                    <span class="help is-danger">{{ form.none_form_errors }}</span>
+                {% endif %}
+                <div class="field">
+                    {{ form.title }}
+                    {% if form.title.errors %}
+                        <span class="help is-danger">{{ form.title.errors }}</span>
+                    {% endif %}
+                </div>
+                <div class="field">
+                    {{ form.description }}
+                    {% if form.description.errors %}
+                        <span class="help is-danger">{{ form.description.errors }}</span>
+                    {% endif %}
+                </div>
+                <div class="field">
+                    <label for="id_cost">Cost of subscription</label>
+                    {{ form.cost }}
+                    {% if form.cost.errors %}
+                        <span class="help is-danger">{{ form.cost.errors }}</span>
+                    {% endif %}
+                </div>
+                <div class="field">
+                    {{ form.image }}
+                    {% if form.image.errors %}
+                        <span class="help is-danger">{{ form.image.errors }}</span>
+                    {% endif %}
+                </div>
+                <div class="field">
+                    <div class="level is-mobile">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <button type="submit" class="button is-primary">Save changes</button>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <a href="{% url 'academy:admin_ranks' %}" class="button is-white">
+                                    <span class="icon"><i class="fas fa-arrow-left"></i></span>
+                                    <span>Cancel changes</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </section>
+
+{% endblock content %}

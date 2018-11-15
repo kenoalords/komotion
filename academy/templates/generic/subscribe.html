@@ -1,0 +1,16 @@
+{% extends '../base/app.html' %}
+
+{% block content %}
+
+    <div class="hero is-burnt">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h3 class="title is-size-4-mobile is-2 has-text-white">Subscribe</h3>
+                <p>Your subcription is either inactive or you are yet to subscribe.</p>
+                <p>Please choose a plan below</p>
+                {% include '../parts/snippets/subscription_form.html' %}
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -7,12 +7,18 @@ class Rank(models.Model):
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to="rank/", null=True, blank=True)
+    cost = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
 
     def __str__(self):
         return self.title
 
     class Meta:
         ordering = ['title']
+
+class RankDescription(models.Model):
+    title = models.CharField(max_length=128)
+    description = models.CharField(max_length=128)
+    rank = models.ForeignKey(Rank, on_delete=models.CASCADE)
 
 class Software(models.Model):
     title = models.CharField(max_length=128)
@@ -56,7 +62,6 @@ class Course(models.Model):
     category = models.ManyToManyField(Category)
     software = models.ManyToManyField(Software)
     rank = models.ManyToManyField(Rank)
-    files = models.ManyToManyField('CourseFile', blank=True)
     views = models.ManyToManyField('View', blank=True)
     likes = models.ManyToManyField('Like', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -64,7 +69,12 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ['-created_at']
+        permissions = (('can_view_course', 'Can View Course'),)
+
 class CourseFile(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     track_no = models.IntegerField()
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True, null=True)
@@ -101,3 +111,17 @@ class Slider(models.Model):
 
     def __str__(self):
         return self.title
+
+class Subscription(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    rank = models.ForeignKey(Rank, on_delete=models.SET_NULL, null=True)
+    start_date = models.DateField(auto_now_add=False)
+    end_date = models.DateField(auto_now_add=False)
+    is_active = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class Payment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    tranx_ref = models.CharField(max_length=64)
+    created_at = models.DateTimeField(auto_now_add=True)

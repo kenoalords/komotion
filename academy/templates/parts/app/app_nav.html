@@ -24,9 +24,18 @@
                     <a href="{% url 'academy:how_it_works' %}" class="navbar-item">How it works</a>
                     <a href="#" class="navbar-item">Forum</a>
                     <a href="#" class="navbar-item">Blog</a>
+                    {% if request.user.is_authenticated %}
                     <div class="navbar-item">
-                        <a href="{% url 'login' %}" class="button is-info">Sign up</a>
+                        <a href="{% url 'academy:dashboard' %}" class="button is-info is-small is-rounded">Dashboard</a>
                     </div>
+                    {% else %}
+                    <div class="navbar-item">
+                        <a href="{% url 'account_login' %}" class="button is-info is-small is-rounded">Login</a>
+                    </div>
+                    <div class="navbar-item">
+                        <a href="{% url 'account_signup' %}" class="button is-info is-small is-rounded">Create account</a>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

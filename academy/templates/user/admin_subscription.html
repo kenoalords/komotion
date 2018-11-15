@@ -1,0 +1,46 @@
+{% extends '../base/dashboard.html' %}
+
+{% block content %}
+
+    <section>
+        <div class="container">
+            <h2 class="title is-3">Subscriptions</h2>
+            <hr>
+            {% if subs %}
+                <table class="table is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Rank</th>
+                            <th>Date</th>
+                            <th>Expiry</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sub in subs %}
+                            <tr>
+                                <td>{{ sub.user.email }}</td>
+                                <td>{{ sub.rank.title }}</td>
+                                <td>{{ sub.start_date }}</td>
+                                <td>{{ sub.end_date }}</td>
+                                <td>
+                                    {% if sub.is_active == True %}
+                                        <span class="indicator is-active">Active</span>
+                                    {% else %}
+                                        <span class="indicator is-expired">Expired</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="notification is-danger">
+                    You do not have any subscriptions
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock content %}

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="hero is-burnt">
+<div class="hero">
     <div class="hero-body">
         <div class="container">
             <div class="columns">
@@ -34,16 +34,17 @@
     </div>
 </div>
 
-<div class="hero">
+<div class="hero is-burnt">
     <div class="hero-body">
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-8">
-                    {% if course.files %}
-                        <h2 class="title is-4 has-text-white">{{ course.files.count }} Video{{ course.files.count|pluralize }}</h2>
+                    {% if files %}
+                        <h2 class="title is-4 has-text-white">{{ files.count }} Video{{ files.count|pluralize }}</h2>
                         <hr>
-                        {% include '../snippets/course-files.html' with files=course.files.all tutorial=course.id %}
+                        {% include '../snippets/course-files.html' with files=files tutorial=course.id %}
                     {% endif %}
+
                 </div>
             </div>
         </div>

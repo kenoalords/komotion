@@ -1,0 +1,61 @@
+{% extends "account/base.html" %}
+
+{% load i18n socialaccount %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<h1 class="title is-4">{% trans "Create account" %}</h1>
+
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+    <div class="socialaccount_ballot">
+        <ul class="socialaccount_providers">
+            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+        </ul>
+    </div>
+    {% include "socialaccount/snippets/login_extra.html" %}
+{% endif %}
+
+<p>{% blocktrans %}Already have an account? <a href="{{ login_url }}" class="has-text-weight-bold">Sign in</a>.{% endblocktrans %}</p>
+<p class="login-or">{% trans 'or' %}</p>
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+  <div class="field">
+      {{ form.email }}
+      {% if form.email.errors %}
+          <span class="help is-danger">{{ form.email.errors }}</span>
+      {% endif %}
+  </div>
+  <div class="field">
+      {{ form.username }}
+      {% if form.username.errors %}
+          <span class="help is-danger">{{ form.username.errors }}</span>
+      {% endif %}
+  </div>
+  <div class="field">
+      {{ form.password1 }}
+      {% if form.password1.errors %}
+          <span class="help is-danger">{{ form.password1.errors }}</span>
+      {% endif %}
+  </div>
+  <div class="field">
+      {{ form.password2 }}
+      {% if form.password2.errors %}
+          <span class="help is-danger">{{ form.password2.errors }}</span>
+      {% endif %}
+  </div>
+  <div class="field">
+      {{ form.captcha }}
+      {% if form.captcha.errors %}
+          <span class="help is-danger">{{ form.captcha.errors }}</span>
+      {% endif %}
+  </div>
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button class="button is-info is-fullwidth" type="submit"><span>{% trans "Sign Up" %}</span> <span class="icon"><i class="fas fa-arrow-right"></i></span></button>
+</form>
+
+{% endblock %}

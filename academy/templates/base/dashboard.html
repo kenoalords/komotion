@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <title>Dashboard - Komotion Academy</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <link rel="icon" href="{% static 'images/logo.png' %}">
+    </head>
+    <body>
+        <div id="dashboard">
+            <div class="columns is-paddingless">
+                <aside id="dashboard-menu" class="column is-2">
+                    <div class="has-text-centered">
+                        <a href="{% url 'academy:index' %}" class="logo">
+                            <img src="{% static 'images/logo.png' %}" alt="Komotion Academy">
+                        </a>
+                    </div>
+                    <div class="menu">
+                        <p class="menu-label">Dashboard</p>
+                        <ul class="menu-list">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Watch later</a></li>
+                            <li><a href="{% url 'academy:dashboard_subscription' %}">Subscription</a></li>
+                        </ul>
+                        {% if request.user.is_staff %}
+                        <p class="menu-label">Administration</p>
+                        <ul class="menu-list">
+                            <li><a href="{% url 'academy:admin_courses' %}">Courses</a></li>
+                            <li><a href="{% url 'academy:admin_ranks' %}">Ranks</a></li>
+                            <li><a href="{% url 'academy:admin_subscriptions' %}">Subscription</a></li>
+                        </ul>
+                        {% endif %}
+                        <ul class="menu-list">
+                            <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                        </ul>
+                    </div>
+                </aside>
+                <div id="dashboard-content" class="column is-10">
+                    <div class="container">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div{% if message.tags %} class="notification is-{{ message.tags }}"{% endif %}>{{ message|safe }}</div>
+                            {% endfor %}
+                        {% endif %}
+
+                        {% block content %}
+                        {% endblock content %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    </body>
+</html>

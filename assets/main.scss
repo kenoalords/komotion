@@ -22,7 +22,7 @@ body{
         right: 0;
         bottom: 0;
         background: rgba(255,255,255,.02);
-        z-index: 1;
+        z-index: -1;
     }
     #wrapper{
         position: relative;
@@ -152,8 +152,79 @@ h1, h2, h3, h4{
     }
 }
 
+.box{
+    border-radius: 0;
+    box-shadow: 0 0 3px rgba(black, .2);
+    p{
+        color: #111;
+    }
+}
+
+.paystack{
+    max-width: 200px;
+    height: auto;
+}
+
+.indicator{
+    display: flex;
+    align-items: center;
+    &:before{
+        content: "";
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        border-radius: 1em;
+        background: #eee;
+        margin-right: 10px;
+    }
+    &.is-inactive{
+
+    }
+    &.is-active{
+        &:before{
+            background: #0f0;
+        }
+    }
+    &.is-expired{
+        &:before{
+            background: #f00;
+        }
+    }
+}
+.currency{
+    &:before{
+        content: "\20A6";
+        display: inline-block;
+        font-family: monospace;
+        font-weight: bold;
+    }
+}
+.subscription-form{
+
+    .plan-footer{
+        label{
+            display: block;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            background: #fff;
+            border: 2px solid #ddd;
+            border-radius: 3px;
+            font-size: 1.125em;
+            &.is-checked{
+                background: $highlightColor;
+                color: #fff;
+                border-color: rgba(black, .3);
+            }
+            input{
+                display: none;
+            }
+        }
+    }
+}
+
 .course-snippet{
-    >figure{
+    figure.course-image{
         margin-bottom: 1em;
         height: 180px;
         width: 100%;
@@ -165,6 +236,7 @@ h1, h2, h3, h4{
     .title{
         text-transform: uppercase;
         margin-bottom: 5px;
+        font-size: 1em !important;
         a{
             color: #fff !important;
             &:hover{
@@ -367,7 +439,7 @@ ul.categories{
                 position: relative;
                 &:after{
                     font-family: "Font Awesome 5 Free";
-                    content: "\f144"; 
+                    content: "\f144";
                     position: absolute;
                     font-size: 24px;
                     right: 12px;
@@ -377,6 +449,17 @@ ul.categories{
                 }
             }
         }
+    }
+}
+
+.hero{
+    &.is-burnt{
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#21354f+0,0f1823+100 */
+        background: #21354f; /* Old browsers */
+        background: -moz-radial-gradient(center, ellipse cover, #21354f 0%, #0f1823 100%); /* FF3.6-15 */
+        background: -webkit-radial-gradient(center, ellipse cover, #21354f 0%,#0f1823 100%); /* Chrome10-25,Safari5.1-6 */
+        background: radial-gradient(ellipse at center, #21354f 0%,#0f1823 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#21354f', endColorstr='#0f1823',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     }
 }
 
@@ -399,11 +482,96 @@ ul.categories{
             max-width: 96px;
         }
     }
+    color: #111;
+    p{
+        color: #111;
+    }
     form{
+
         input{
-            &[type="text"]{
+            &[type="text"],
+            &[type="email"],
+            &[type="password"]{
                 padding: 10px;
+                border-radius: 3px;
+                font-size: 14px;
+                width: 100%;
+                outline: none;
+                -webkit-appearance: none;
+                appearance: none;
+                border: 1px solid rgba(0,0,0,.2);
             }
+        }
+    }
+}
+
+.notification{
+    padding: 0.55rem 2.5rem 0.55rem 1.5rem;
+}
+
+#dashboard{
+    min-height: 100vh;
+    #dashboard-menu{
+        .logo{
+            display: inline-block;
+            margin: 3em auto;
+            img{
+                width: 100px;
+                height: auto;
+            }
+        }
+        .menu{
+            padding: 0 2em;
+        }
+        .menu-list{
+            li{
+                a{
+                    color: #fff;
+                    &:hover{
+                        background: none;
+                        color: $highlightColor;
+                    }
+                }
+            }
+        }
+    }
+    #dashboard-content{
+        background: rgba(255,255,255,1);
+        padding: 4em 1em;
+        height: 100vh;
+        overflow-y: scroll;
+        hr{
+            background: rgba(black, .6);
+        }
+    }
+}
+
+.course_file_block{
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #eee;
+}
+
+.admin_courses{
+    &:hover{
+        box-shadow: 0 0 20px rgba(black, .1);
+    }
+    color: #111 !important;
+    p{
+        color: #111 !important;
+    }
+    .title{
+        margin-bottom: 10px;
+        a{
+            color: #111;
+            &:hover{
+                color: $highlightColor;
+            }
+        }
+    }
+    .avatar{
+        a{
+            color: #111 !important;
         }
     }
 }

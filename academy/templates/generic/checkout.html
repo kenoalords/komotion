@@ -1,0 +1,57 @@
+{% extends '../base/app.html' %}
+
+{% load cost humanize static %}
+{% block content %}
+
+    <div class="hero is-burnt">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+
+                <h3 class="title is-size-4-mobile is-2 has-text-white">Checkout</h3>
+                <p>Your subscription to rank <strong class="has-text-white">{{ rank.title }}</strong> is almost complete. Please review your subscription below.</p>
+                <div class="columns is-centered">
+                    <div class="column is-5">
+                        <div class="box has-text-dark">
+
+                            <h4 class="title is-5 has-text-danger">
+                                <span class="icon"><i class="fas fa-lock"></i></span>
+                                <span>Secured checkout</span>
+                            </h4>
+                            <table class="table is-striped is-bordered is-fullwidth">
+                                <tbody>
+                                    <tr>
+                                        <td>Duration</td>
+                                        <td>{{ duration }} Month(s)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amount</td>
+                                        <td><strong class="currency">{{ cost|cost_int|intcomma }}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <form action="{% url 'academy:checkout' %}" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="rank" value="{{ rank.id }}">
+                                                <input type="hidden" name="duration" value="{{ duration }}">
+                                                <button type="submit" class="button is-danger is-fullwidth">
+                                                    Pay now
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <hr>
+                            <div class="has-text-centered">
+                                <img src="{% static 'images/paystack-cards.png' %}" alt="Paystack" class="paystack">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

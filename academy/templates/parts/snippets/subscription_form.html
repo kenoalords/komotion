@@ -1,0 +1,52 @@
+{% load humanize cost %}
+<form action="{% url 'academy:subscribe' %}" class="subscription-form" method="post">
+    {% csrf_token %}
+    <div class="pricing-table">
+        {% for rank in ranks %}
+        <div class="pricing-plan is-info">
+            <div class="plan-header">{{ rank.title }}</div>
+            <div class="plan-price">
+                <span class="plan-price-amount"><span class="plan-price-currency currency"></span>{{ rank.cost|cost_int|intcomma }}</span>/month
+            </div>
+            <div class="plan-items">
+                <div class="plan-item">2TB Storage</div>
+                <div class="plan-item">100 Domains</div>
+                <div class="plan-item">1TB Bandwidth</div>
+                <div class="plan-item">1000 Email Boxes</div>
+            </div>
+            <div class="plan-footer">
+                <div class="field">
+                    <label for="rank-{{ rank.id }}">
+                        <input type="radio" name="rank" class="rank" id="rank-{{ rank.id }}" value="{{ rank.id }}"> Choose
+                    </label>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <hr>
+
+    <div class="columns is-centered duration-wrapper">
+        <div class="column is-4">
+            <div class="field">
+                <div class="select is-fullwidth">
+                    <select name="duration" class="duration">
+                        <option value="0">Select duration</option>
+                        <option value="1" {% if request.GET.duration == "1" %} selected="selected" {% endif %}>Monthly</option>
+                        <option value="6" {% if request.GET.duration == "6" %} selected="selected" {% endif %}>Bi-Anually</option>
+                        <option value="12" {% if request.GET.duration == "12" %} selected="selected" {% endif %}>Yearly</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <hr>
+    <div class="field">
+        <button type="submit" class="button is-danger" id="submit-subscription" disabled>
+            <span>Proceed</span>
+            <span class="icon"><i class="fas fa-arrow-right"></i></span>
+        </button>
+    </div>
+</form>

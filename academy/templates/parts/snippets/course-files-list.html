@@ -5,19 +5,19 @@
             <li>
                 <a href="{% url 'academy:view_video' id=tutorial video=file.id %}" class="{{ file.id|is_active:video.id }}">
                     <div class="columns is-mobile">
-                        <div class="column is-3">
-                            <figure class="image">
-                                <img src="{{ file.image.url }}" alt="{{ file.title }}">
+                        <div class="column is-1 is-one-quarter-mobile">
+                            <figure class="image is-48x48" style="background: url({{ file.image.url }}) no-repeat center; background-size: cover">
+                                <img src="{{ file.image.url }}" alt="{{ file.title }}" class="is-hidden">
                             </figure>
                         </div>
-                        <div class="column is-9">
+                        <div class="column is-11 is-three-quarters-mobile">
                             <h3 class="title is-6 is-marginless">
                                 {{ file.title }}
                             </h3>
                             <div class="level is-mobile course-meta">
                                 <div class="level-left">
                                     <div class="level-item has-text-white is-size-7">
-                                        <span class="icon"><i class="fas fa-clock"></i></span> <span>{{ file.duration|time:'i:s' }}</span>
+                                        <span class="icon"><i class="fas fa-clock"></i></span> <span>{{ file.duration }}</span>
                                     </div>
                                 </div>
                             </div>
