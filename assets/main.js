@@ -2,7 +2,14 @@ import $ from "jquery";
 import slick from "slick-carousel";
 
 (function(){
+    // Check for click events on the navbar burger icon
+    $(".navbar-burger").click(function() {
 
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        $(".navbar-burger").toggleClass("is-active");
+        $(".navbar-menu").toggleClass("is-active");
+
+    });
     if ( $('.carousel').length > 0 ){
         $('.carousel').slick({
             autoplay: true,
@@ -19,6 +26,30 @@ import slick from "slick-carousel";
             dots: true,
             slidesToShow: 4,
             slidesToScroll: 4,
+            responsive: [
+                {
+                  breakpoint: 1024,
+                  settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                  }
+                },
+                {
+                  breakpoint: 600,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1
+                  }
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                  }
+              }]
         })
     }
 
@@ -47,7 +78,7 @@ import slick from "slick-carousel";
         if ( $this.hasClass('duration') ){
             duration = $this.val();
         }
-        
+
         if ( parseInt(rank) > 0 && parseInt(duration) > 0 ){
             $('#submit-subscription').removeAttr('disabled');
         } else {

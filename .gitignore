@@ -1,7 +1,7 @@
 node_modules
 assets
 komotion/settings.py
-gulpfile.js
+#gulpfile.js
 webpack.config.js
 db.sqlite3
 academy/migrations
